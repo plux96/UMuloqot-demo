@@ -1,1 +1,1 @@
-# UMuloqot video conference app
+# UMuloqot app is video conference application
