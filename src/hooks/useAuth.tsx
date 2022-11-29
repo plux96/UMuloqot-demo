@@ -11,7 +11,7 @@ function useAuth() {
   useEffect(() => {
     const unsubsucribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
       console.log(currentUser);
-      if (!currentUser) navigate("/");
+      if (!currentUser) navigate("/login");
       else {
         dispatch(
           setUser({
