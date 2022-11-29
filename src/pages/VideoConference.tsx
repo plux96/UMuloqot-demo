@@ -28,13 +28,15 @@ function VideoConference() {
   useAuth();
   const navigate = useNavigate();
   const [users] = useFetchUsers();
+  const [createToast] = useToast();
+
   const uid = useAppSelector((data) => data.auth.userInfo?.uid);
   const [meetingName, setMeetingName] = useState("");
   const [selectedUsers, setSelectedUsers] = useState<Array<UserType>>([]);
   const [startDate, setStartDate] = useState(moment());
   const [size, setSize] = useState(1);
   const [anyoneCanJoin, setAnyoneCanJoin] = useState(false);
-  const [createToast] = useToast();
+
   const [showErrors, setShowErrors] = useState<{
     meetingName: FieldErrorType;
     meetingUser: FieldErrorType;

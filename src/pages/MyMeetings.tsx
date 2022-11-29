@@ -16,33 +16,46 @@ import {
 } from "@elastic/eui";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import EditFlyout from "../components/EditFlyout";
 
 export default function MyMeetings() {
   useAuth();
   const [meetings, setMeetings] = useState<any>([]);
   const userInfo = useAppSelector((data) => data.auth.userInfo);
-  console.log(process.env);
-  useEffect(() => {
-    const getMyMeetings = async () => {
-      const firestoreQuery = query(
-        meetingsRef,
-        where("createdBy", "==", userInfo?.uid)
-      );
-      const fetchedMeetings = await getDocs(firestoreQuery);
-      if (fetchedMeetings.docs.length) {
-        const myMeetings: Array<MeetingType> = [];
-        fetchedMeetings.forEach((meeting) => {
-          myMeetings.push({
-            docId: meeting.id,
-            ...(meeting.data() as MeetingType),
-          });
+  const myMeetings: Array<MeetingType> = [];
+  const getMyMeetings = async () => {
+    const firestoreQuery = query(
+      meetingsRef,
+      where("createdBy", "==", userInfo?.uid)
+    );
+    const fetchedMeetings = await getDocs(firestoreQuery);
+    if (fetchedMeetings.docs.length) {
+      fetchedMeetings.forEach((meeting) => {
+        myMeetings.push({
+          docId: meeting.id,
+          ...(meeting.data() as MeetingType),
         });
-        setMeetings(myMeetings);
-      }
-    };
-    console.log({ meetings });
+      });
+      setMeetings(myMeetings);
+    }
+  };
+  useEffect(() => {
     getMyMeetings();
   }, [userInfo]);
+
+  const [showEditFlyout, setShowEditFlyout] = useState(false);
+  const [editMeeting, setEditMeeting] = useState<MeetingType>();
+
+  const openEditFlyout = (meeting: MeetingType) => {
+    setShowEditFlyout(true);
+    setEditMeeting(meeting);
+  };
+
+  const closeEditFlyout = (dataChanged = false) => {
+    setShowEditFlyout(false);
+    setEditMeeting(undefined);
+    if (dataChanged) getMyMeetings();
+  };
 
   const columns = [
     {
@@ -97,7 +110,7 @@ export default function MyMeetings() {
               !meeting.status ||
               moment(meeting.meetingDate).isBefore(moment().format("L"))
             }
-            onClick={() => {}}
+            onClick={() => openEditFlyout(meeting)}
           />
         );
       },
@@ -136,6 +149,9 @@ export default function MyMeetings() {
           </EuiPanel>
         </EuiFlexItem>
       </EuiFlexGroup>
+      {showEditFlyout && (
+        <EditFlyout closeFlyout={closeEditFlyout} meetings={editMeeting!} />
+      )}
     </div>
   );
 }
