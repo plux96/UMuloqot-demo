@@ -27,7 +27,7 @@ function Dashboard() {
               icon={<EuiImage src={dashboard1} alt="icon" size="5rem" />}
               title={`Creating Meeting`}
               description="Create a new meeting and invite people."
-              onClick={() => navigate("/navigate")}
+              onClick={() => navigate("/create")}
               paddingSize="xl"
             />
           </EuiFlexItem>

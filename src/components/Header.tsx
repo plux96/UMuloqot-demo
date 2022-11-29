@@ -14,6 +14,10 @@ import { useAppSelector } from "../app/hook";
 import { firebaseAuth } from "../utils/FirebaseConfig";
 import { signOut } from "firebase/auth";
 import { changeTheme } from "../app/slices/AuthSlice";
+import {
+  getCreateMeetingBreadCrumbs,
+  getSingleMeetingBreadCrumbs,
+} from "../utils/breadCrumbs";
 
 const logout = () => {
   signOut(firebaseAuth);
@@ -33,6 +37,15 @@ function Header() {
     localStorage.setItem("u-theme", theme === "light" ? "dark" : "light");
     dispatch(changeTheme({ isDarkTheme: !isDarkTheme }));
   };
+
+  useEffect(() => {
+    const { pathname } = location;
+    if (pathname === "/create") {
+      setBreadCrumbs(getCreateMeetingBreadCrumbs(navigate));
+    } else if (pathname === "/create1on1") {
+      setBreadCrumbs(getSingleMeetingBreadCrumbs(navigate));
+    }
+  }, [location, navigate]);
 
   const section = [
     {
