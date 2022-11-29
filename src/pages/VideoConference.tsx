@@ -67,7 +67,7 @@ function VideoConference() {
     if (!selectedUsers.length) {
       clonedShowError.meetingUser.show = true;
       clonedShowError.meetingUser.message = ["Please select a User"];
-      errors = true;
+      errors = anyoneCanJoin ? false : true;
     } else {
       clonedShowError.meetingUser.show = false;
       clonedShowError.meetingUser.message = [];
@@ -78,6 +78,7 @@ function VideoConference() {
 
   const createMeeting = async () => {
     if (!validateForm()) {
+      console.log("hello");
       const meetingId = generateMeetingId();
       await addDoc(meetingsRef, {
         createdBy: uid,
@@ -125,7 +126,7 @@ function VideoConference() {
             error={showErrors.meetingName.message}
           />
           {anyoneCanJoin ? (
-            <MeetingMaximumUserField value={size} setValue={setSize} />
+            <MeetingMaximumUserField value={+size} setValue={setSize} />
           ) : (
             <MeetingUsersField
               label="Invite users"

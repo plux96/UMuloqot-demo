@@ -17,6 +17,7 @@ import { changeTheme } from "../app/slices/AuthSlice";
 import {
   getCreateMeetingBreadCrumbs,
   getSingleMeetingBreadCrumbs,
+  getVideoConferenceMeetingBreadCrumbs,
 } from "../utils/breadCrumbs";
 
 const logout = () => {
@@ -44,6 +45,8 @@ function Header() {
       setBreadCrumbs(getCreateMeetingBreadCrumbs(navigate));
     } else if (pathname === "/create1on1") {
       setBreadCrumbs(getSingleMeetingBreadCrumbs(navigate));
+    } else if (pathname === "/createvideoconference") {
+      setBreadCrumbs(getVideoConferenceMeetingBreadCrumbs(navigate));
     }
   }, [location, navigate]);
 

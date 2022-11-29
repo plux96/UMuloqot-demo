@@ -13,6 +13,7 @@ import ThemeSelector from "./components/ThemeSelector";
 import CreateMeeting from "./pages/CreateMeeting";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import MyMeetings from "./pages/MyMeetings";
 import SingleMeeting from "./pages/SingleMeeting";
 import VideoConference from "./pages/VideoConference";
 
@@ -50,7 +51,7 @@ function App() {
   const removeToast = (removeToast: { id: string }) => {
     dispatch(
       setToasts(
-        toasts.filter((toast: { id: string }) => toast.id === removeToast.id)
+        toasts.filter((toast: { id: string }) => toast.id !== removeToast.id)
       )
     );
   };
@@ -67,13 +68,14 @@ function App() {
               path="/createvideoconference"
               element={<VideoConference />}
             />
+            <Route path="/mymeetings" element={<MyMeetings />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="*" element={<Dashboard />} />
           </Routes>
           <EuiGlobalToastList
             toasts={toasts}
             dismissToast={removeToast}
-            toastLifeTimeMs={5000}
+            toastLifeTimeMs={2000}
           />
         </EuiThemeProvider>
       </EuiProvider>
