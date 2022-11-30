@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import useToast from "../hooks/useToast";
 import { query, where, getDocs } from "firebase/firestore";
 import moment from "moment";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import { generateMeetingId } from "../utils/generateMeetingId";
 
 export default function JoinMeeting() {
   const [user, setUser] = useState<any>(undefined);
@@ -79,11 +81,53 @@ export default function JoinMeeting() {
             setIsAllowed(true);
           }
         } else {
-          navigate("/");
+          createToast({
+            title:
+              "This meeting han not been founded. Please check meeting ID!",
+            type: "danger",
+          });
+          navigate(user ? "/" : "/login");
         }
       }
     };
     getMeetingData();
   }, [userLoaded]);
-  return <div>JoinMeeting</div>;
+  const appId = 2107279082;
+  const serverSecret = "f22a4cc6b642fa5d874b764b2868449f";
+
+  const myMeeting = async (element: any) => {
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+      appId,
+      serverSecret,
+      params.id as string,
+      user.uid ? user.uid : generateMeetingId(),
+      user.displayName ? user.displayName : generateMeetingId()
+    );
+    const zp = ZegoUIKitPrebuilt.create(kitToken);
+    zp.joinRoom({
+      container: element,
+      maxUsers: 50,
+      sharedLinks: [
+        {
+          name: "Personal Meeting Link",
+          url: window.location.href,
+        },
+      ],
+      scenario: {
+        mode: ZegoUIKitPrebuilt.VideoConference,
+      },
+    });
+  };
+
+  return (
+    <div>
+      {isAllowed && (
+        <div
+          className="myCallContainer"
+          ref={myMeeting}
+          style={{ width: "100%", height: "100vh" }}
+        ></div>
+      )}
+    </div>
+  );
 }

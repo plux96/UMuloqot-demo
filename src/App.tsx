@@ -79,7 +79,7 @@ function App() {
           <EuiGlobalToastList
             toasts={toasts}
             dismissToast={removeToast}
-            toastLifeTimeMs={2000}
+            toastLifeTimeMs={4000}
           />
         </EuiThemeProvider>
       </EuiProvider>

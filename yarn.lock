@@ -3107,6 +3107,11 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@zegocloud/zego-uikit-prebuilt@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@zegocloud/zego-uikit-prebuilt/-/zego-uikit-prebuilt-1.4.0.tgz#59c1d885dc6950387b824124c76b54b67b20e0af"
+  integrity sha512-5fdCSIWO4FVFhAv1pFYZzk8/qiH1BeyJ0zFKDTe8Pk50aAaA/MPArgPwjM6fE8xu7YzYxWfOJ4aw0ckKlx2j/w==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.6.tgz#41b80f2c871d19686216b82309231cfd3cb3d291"
