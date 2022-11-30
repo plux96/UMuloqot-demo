@@ -21,6 +21,7 @@ import {
   getSingleMeetingBreadCrumbs,
   getVideoConferenceMeetingBreadCrumbs,
 } from "../utils/breadCrumbs";
+import DarkTheme from "./Themes/DarkTheme";
 
 const logout = () => {
   signOut(firebaseAuth);
@@ -166,25 +167,14 @@ function Header() {
               flexBasis: "fit-content",
             }}
           >
-            {isDarkTheme ? (
-              <EuiButtonIcon
-                onClick={invertTheme}
-                iconType="sun"
-                display="fill"
-                size="s"
-                color="warning"
-                arial-label="invertTheme-button"
-              />
-            ) : (
-              <EuiButtonIcon
-                onClick={invertTheme}
-                iconType="moon"
-                display="fill"
-                size="s"
-                color="ghost"
-                arial-label="invertTheme-button"
-              />
-            )}
+            <EuiButtonIcon
+              onClick={invertTheme}
+              iconType={isDarkTheme ? "moon" : "sun"}
+              display="fill"
+              size="s"
+              color={isDarkTheme ? "ghost" : "warning"}
+              arial-label="invertTheme-button"
+            />
           </EuiFlexItem>
           <EuiFlexItem
             grow={false}
