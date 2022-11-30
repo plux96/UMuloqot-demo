@@ -16,6 +16,7 @@ import { signOut } from "firebase/auth";
 import { changeTheme } from "../app/slices/AuthSlice";
 import {
   getCreateMeetingBreadCrumbs,
+  getMeetingsBreadCrumbs,
   getMyMeetingsBreadCrumbs,
   getSingleMeetingBreadCrumbs,
   getVideoConferenceMeetingBreadCrumbs,
@@ -50,6 +51,8 @@ function Header() {
       setBreadCrumbs(getVideoConferenceMeetingBreadCrumbs(navigate));
     } else if (pathname === "/mymeetings") {
       setBreadCrumbs(getMyMeetingsBreadCrumbs(navigate));
+    } else if (pathname === "/meetings") {
+      setBreadCrumbs(getMeetingsBreadCrumbs(navigate));
     }
   }, [location, navigate]);
 

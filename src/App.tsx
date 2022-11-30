@@ -12,7 +12,9 @@ import { setToasts } from "./app/slices/MeetingSlice";
 import ThemeSelector from "./components/ThemeSelector";
 import CreateMeeting from "./pages/CreateMeeting";
 import Dashboard from "./pages/Dashboard";
+import JoinMeeting from "./pages/JoinMeeting";
 import Login from "./pages/Login";
+import Meetings from "./pages/Meetings";
 import MyMeetings from "./pages/MyMeetings";
 import SingleMeeting from "./pages/SingleMeeting";
 import VideoConference from "./pages/VideoConference";
@@ -69,6 +71,8 @@ function App() {
               element={<VideoConference />}
             />
             <Route path="/mymeetings" element={<MyMeetings />} />
+            <Route path="/meetings" element={<Meetings />} />
+            <Route path="/join/:id" element={<JoinMeeting />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="*" element={<Dashboard />} />
           </Routes>
